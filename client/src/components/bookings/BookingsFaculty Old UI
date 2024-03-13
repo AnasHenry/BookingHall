@@ -16,7 +16,7 @@ const BookingFaculty = () => {
 
   const getBookingData = async (userId) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bookingsFaculty`, {
+      const response = await axios.get(`http://localhost:4000/bookingsFaculty`, {
         withCredentials: true, // include credentials in the request
         headers: {
           Accept: "application/json",
@@ -54,7 +54,7 @@ const BookingFaculty = () => {
   };
 
   const filteredBookings = Object.values(bookingData).filter((bookingData) => {
-    if (filterValue === "Request Sent") {
+    if (filterValue === " Sent") {
       return bookingData.isApproved === "Request Sent";
     } else if (filterValue === "Approved By HOD") {
       return bookingData.isApproved === "Approved By HOD";

@@ -47,7 +47,7 @@ const Signup = () => {
 
     try {
       await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/register`,
+        `http://localhost:4000/register`,
         {
           name,
           email,
@@ -160,11 +160,11 @@ const Signup = () => {
                   <option value="">Select</option>
 
                   <option value="faculty">Faculty</option>
-                  {process.env.REACT_APP_HOD_FEATURE === "true" && (
+                  {"false" === "true" && (
                     <option value="hod">HOD</option>
                   )}
 
-                  {process.env.REACT_APP_ADMIN_SIGN_UP === "true" && (
+                  {"true" === "true" && (
                     <option value="admin">Admin</option>
                   )}
                 </select>

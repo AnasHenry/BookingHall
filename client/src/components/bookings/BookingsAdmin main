@@ -6,18 +6,20 @@ import { toast } from "react-toastify";
 import { format, parseISO } from "date-fns"
 // import BookingForm from "./BookingForm";
 import { ApprovedByAdmin,ApprovedByHod,RejectedByAdmin} from "../Steps"
+import "../../../src/hallbook.css"
+
 const BookingsAdmin = () => {
   const navigate = useNavigate();
   const [bookingData, setBookingData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [filterValue, setFilterValue] = useState("Approved By HOD");
-  const [emailVerified, setEmailVerified] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(true);
 
 
 
   const userContact = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getdata`, {
+      const response = await axios.get(`http://localhost:4000/getdata`, {
         withCredentials: true, // include credentials in the request
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +54,7 @@ const BookingsAdmin = () => {
 
   const getBookingData = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bookingsAdmin`, {
+      const response = await axios.get(`http://localhost:4000/bookingsAdmin`, {
         withCredentials: true, // include credentials in the request
         headers: {
           Accept: "application/json",
@@ -124,7 +126,7 @@ const BookingsAdmin = () => {
 
     //consolelog(isApproved);
     try {
-      const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/bookings/${bookingId}`, {
+      const response = await axios.put(`http://localhost:4000/bookings/${bookingId}`, {
         isApproved: isApproved
       }, {
         withCredentials: true, // include credentials in the request
@@ -160,7 +162,7 @@ const BookingsAdmin = () => {
 
 
     try {
-      const response = await axios.delete (`${process.env.REACT_APP_SERVER_URL}/bookings/${bookingId}`,
+      const response = await axios.delete (`http://localhost:4000/bookings/${bookingId}`,
 
         {
           withCredentials: true, // To include credentials in the request
@@ -231,7 +233,7 @@ const BookingsAdmin = () => {
 
       <div className="mt-6">
         <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-3xl text-center text-gray-800 font-black leading-7 ml-3 md:leading-10">
-          Booking<span className="text-indigo-700"> Requests</span>  </h1>
+          Booking <span style={{"color":"#6d7f69"}}> Requests</span>  </h1>
     
 
           <div className="flex flex-wrap mb-4 justify-center my-6">

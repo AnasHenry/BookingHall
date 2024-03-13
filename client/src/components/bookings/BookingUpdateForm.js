@@ -40,7 +40,7 @@ const BookingForm = () => {
 
   const getbookingById = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bookingsView/${bookingId}`, {
+      const response = await axios.get(`http://localhost:4000/bookingsView/${bookingId}`, {
         withCredentials: true, // include credentials in the request
         headers: {
           Accept: "application/json",
@@ -131,7 +131,7 @@ const BookingForm = () => {
 
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_SERVER_URL}/bookingsEdit/${bookingId}`,
+        `http://localhost:4000/bookingsEdit/${bookingId}`,
         {
           userId,
           // department,

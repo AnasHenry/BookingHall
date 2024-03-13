@@ -15,7 +15,7 @@ const Authenticate = async (req, res, next) => {
     // const token = req.sessionstotage.jwtoken;
     // const token = window.sessionStorage.getItem('jwtoken');
     // console.log(token);
-    const verifyTokens = jwt.verify(token, process.env.SECRET_KEY);
+    const verifyTokens = jwt.verify(token, "secretkey");
     // console.log(verifyTokens);
     const rootUser = await User.findOne({
       _id: verifyTokens._id,

@@ -11,8 +11,8 @@ const nodemailer = require("nodemailer");
  const transporter = nodemailer.createTransport({
   service:"gmail",
   auth:{
-    user:process.env.SENDER_EMAIL,
-    pass:process.env.SENDER_PASSWORD
+    user:"jeyachandranj.22aim@kongu.edu",
+    pass:"jj.jeyan"
   }
 })
 
@@ -94,7 +94,7 @@ const generateBookingEmailTemplate = (eventName, bookedHallName, organizingClub,
                 </div>
               </div>
               
-              <a href="${process.env.CLIENT_URL}/bookingsView/${bookingId}" style="background-color: #4f46e5; color: #fff; padding: 8px 24px; border-radius: 8px; border-style: solid; border-color: #4f46e5; font-size: 14px; text-decoration: none; cursor: pointer">View Booking</a>
+              <a href="http://localhost:4000/bookingsView/${bookingId}" style="background-color: #4f46e5; color: #fff; padding: 8px 24px; border-radius: 8px; border-style: solid; border-color: #4f46e5; font-size: 14px; text-decoration: none; cursor: pointer">View Booking</a>
             </td>
           </tr>
         </table>
@@ -177,11 +177,7 @@ const createBooking = async (req, res, next) => {
     }
     // Regular expression to validate full name with at least two words separated by a space
 
-        const nameRegex = /^[\w'.]+\s[\w'.]+\s*[\w'.]*\s*[\w'.]*\s*[\w'.]*\s*[\w'.]*$/;
-
-    if (!nameRegex.test(eventManager)) {
-      return res.status(422).json({ error: "Please enter your full Event Coordinator name" });
-    }
+       
 
    
       
@@ -240,13 +236,14 @@ const createBooking = async (req, res, next) => {
 
 
     const mailOptions = {
-      from: process.env.SENDER_EMAIL,
+      from: "jeyachandranj.22aim@kongu.edu",
       to: hall.hallCreater, // Use the hall creator's email here
       subject: 'New Booking Request',
       html:   generateBookingEmailTemplate(eventName, bookedHallName, organizingClub, institution, department, booking._id),
       
     };
 
+  /*
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error('Error sending email:', error);
@@ -254,6 +251,7 @@ const createBooking = async (req, res, next) => {
         console.log('Email sent:', info.response);
       }
     });
+    */
 
 
   
@@ -353,7 +351,7 @@ const getBookingAdmin = async (req, res, next) => {
     const userId = req.rootUser._id;
     // console.log("admin bookng");
     // console.log(adminEmail);
-    if (process.env.REACT_APP_HOD_FEATURE != "true") {
+    if ("false" != "true") {
       statusArray.unshift("Request Sent"); // Add "Request Sent" at the beginning if HOD feature is on
     }
 
@@ -460,13 +458,13 @@ const updateBooking = async (req, res, next) => {
        
     
         const mailOptions = {
-          from: process.env.SENDER_EMAIL,
+          from: "jeyachandranj.22aim@kongu.edu",
           to: booking.email, // Use the user's email associated with the booking
           subject: 'Booking Request Approved',
           html: sendApprovalEmailTemplate(booking.eventName, booking.bookedHallName, booking.organizingClub, booking.institution, booking.department, bookingId),
         };
     
-        await transporter.sendMail(mailOptions);
+      //  await transporter.sendMail(mailOptions);
       } catch (error) {
         next(error);
       }
@@ -478,13 +476,13 @@ const updateBooking = async (req, res, next) => {
        
     
         const mailOptions = {
-          from: process.env.SENDER_EMAIL,
+          from:"jeyachandranj.22aim@kongu.edu",
           to: booking.email, // Use the user's email associated with the booking
           subject: "Booking Request Rejected",
           html: sendRejectionEmailTemplate(booking.eventName, booking.bookedHallName, booking.organizingClub, booking.institution, booking.department, bookingId ,rejectionReason),
         };
     
-        await transporter.sendMail(mailOptions);
+       // await transporter.sendMail(mailOptions);
       } catch (error) {
         console.error('Error sending email:', error);
       }
@@ -573,7 +571,7 @@ const updateBooking = async (req, res, next) => {
                   </div>
                   </div>
                   
-                  <a href="${process.env.CLIENT_URL}/bookingsView/${bookingId}"  style="background-color: #4f46e5; color: #fff; padding: 8px 24px; border-radius: 8px; border-style: solid; border-color: #4f46e5; font-size: 14px; text-decoration: none; cursor: pointer">View Booking</a>
+                  <a href="http://localhost:4000/bookingsView/${bookingId}"  style="background-color: #4f46e5; color: #fff; padding: 8px 24px; border-radius: 8px; border-style: solid; border-color: #4f46e5; font-size: 14px; text-decoration: none; cursor: pointer">View Booking</a>
                 </td>
               </tr>
             </table>
@@ -670,7 +668,7 @@ const updateBooking = async (req, res, next) => {
                   </div>
                   </div>
                   
-                  <a href="${process.env.CLIENT_URL}/bookingsView/${bookingId}"  style="background-color: #4f46e5; color: #fff; padding: 8px 24px; border-radius: 8px; border-style: solid; border-color: #4f46e5; font-size: 14px; text-decoration: none; cursor: pointer">View Booking</a>
+                  <a href="http:localhost:4000/bookingsView/${bookingId}"  style="background-color: #4f46e5; color: #fff; padding: 8px 24px; border-radius: 8px; border-style: solid; border-color: #4f46e5; font-size: 14px; text-decoration: none; cursor: pointer">View Booking</a>
                 </td>
               </tr>
             </table>

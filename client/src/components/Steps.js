@@ -13,7 +13,7 @@ export const RequestSent = () => {
 
   return (
     <>
-      {process.env.REACT_APP_HOD_FEATURE === "true" ?
+      {"false" === "true" ?
         (
           <>
             <div className="w-full py-6">
@@ -217,7 +217,7 @@ export const ApprovedByAdmin = () => {
 
   return (
     <>
-      { process.env.REACT_APP_HOD_FEATURE === "true" ?
+      { "false" === "true" ?
         (
           <>
             <div className="w-full py-6">
@@ -428,7 +428,7 @@ export const RejectedByAdmin = () => {
 
 return (
       <>
-        {process.env.REACT_APP_HOD_FEATURE === "true" ?
+        {"false" === "true" ?
           (
             <>
               <div className="w-full py-6">

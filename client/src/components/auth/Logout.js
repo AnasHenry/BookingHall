@@ -15,7 +15,7 @@ const userId = localStorage.getItem("userId")
 
     const logoutUser = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/logout/${userId}`, {
+        const res = await axios.get(`http://localhost:4000/logout/${userId}`, {
           // userId,
           withCredentials: true, // include credentials in the request
           headers: {

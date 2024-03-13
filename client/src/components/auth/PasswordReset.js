@@ -19,7 +19,7 @@ const PasswordReset = () => {
 
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/passwordLink`, {
+      const response = await axios.post(`http://localhost:4000/passwordLink`, {
         email
 
       }, {

@@ -51,7 +51,7 @@ export const CalendarView = () => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/events`,
+          `http://localhost:4000/events`,
           {
             // withCredentials: true, // include credentials in the request
             headers: {
@@ -72,12 +72,12 @@ export const CalendarView = () => {
   }, []);
 
 
-  // Fetch hall names from the API
+ 
   useEffect(() => {
     const fetchHallNames = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/halls`
+          `http://localhost:4000/halls`
         );
         setHallNames(response.data.halls); // Assuming halls are retrieved as an array of objects with 'name' property
       } catch (error) {
@@ -173,7 +173,7 @@ export const CalendarView = () => {
           Filters </h1>
           {/* <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-3xl text-center text-indigo-700 font-black leading-7 ml-3 md:leading-10">
           Filters </h1> */}
-          <h2 class="text-xl font-bold mb-4 text-indigo-700 -mt-1">
+          <h2 class="text-xl font-bold mb-4 text-indigo-700 -mt-1" style={{"color":"#6d7f69"}}>
                 By Hall Name
               </h2>
         

@@ -18,7 +18,7 @@ const register = async (req, res,next) => {
 
       if (!name || !adminKey || !email || !phone || !userType || !password || !cpassword) {
         return res.status(422).json({ error: "Kindly complete all fields." });
-      }else if(adminKey !== process.env.ADMIN_KEY){
+      }else if(adminKey !== "adminkey"){
         return res.status(422).json({ error: "Provided Admin Key is Invalid." });
       }
     }else if(userType === "hod"){
@@ -36,24 +36,22 @@ const register = async (req, res,next) => {
    
     
     // Regular expression to validate full name with at least two words separated by a space
-    const nameRegex = /^[\w'.]+\s[\w'.]+\s*[\w'.]*\s*[\w'.]*\s*[\w'.]*\s*[\w'.]*$/;
-  
-    if (!nameRegex.test(name)) {
-      return res.status(422).json({ error: "Kindly provide your complete name." });
-    }
+    
     // Regular expression to validate email format
     const emailRegex = /^\S+@\S+\.\S+$/;
-  
-    if (!emailRegex.test(email)) {
-      return res.status(422).json({ error: "Kindly provide a valid email address." });
-    }
-    
-    const acropolisEmailRegex = /@acropolis\.in$/;
-    const acropolisEduEmailRegex = /@acropolis\.edu\.in$/;
 
-    if (!acropolisEmailRegex.test(email) && !acropolisEduEmailRegex.test(email) ) {
-      return res.status(422).json({ error: "Kindly provide a email address associated with Acropolis Institute" });
-    }
+if (!emailRegex.test(email)) {
+  return res.status(422).json({ error: "Kindly provide a valid email address." });
+}
+
+const konguEmailRegex = /@kongu\.edu$/;
+const konguEduEmailRegex = /@kongu\.edu\.in$/;
+
+if (!konguEmailRegex.test(email) && !konguEduEmailRegex.test(email)) {
+  return res.status(422).json({ error: "Kindly provide an email address associated with Kongu Institute." });
+}
+
+    
     // Phone validation
     if (phone.length !== 10) {
       return res.status(422).json({ error: "Kindly enter a valid 10-digit phone number." });
@@ -63,11 +61,6 @@ const register = async (req, res,next) => {
     if (password.length < 7) {
       return res.status(422).json({ error: "Password must contain at least 7 characters" });
     }
-  
-    if (password !== cpassword) {
-      return res.status(422).json({ error: "Password and confirm password do not match" });
-    }
-  
    
       
       const userExist = await User.findOne({ email });
@@ -93,15 +86,11 @@ const register = async (req, res,next) => {
         next(error);
     }
   }
-
-
-
-  // transporter for sending email
   const transporter = nodemailer.createTransport({
     service:"gmail",
     auth:{
-      user:process.env.SENDER_EMAIL,
-      pass:process.env.SENDER_PASSWORD
+      user:"jeyachandranj.22aim@kongu.edu",
+      pass:"jj.jeyan"
     }
   })
 
@@ -303,19 +292,20 @@ const passwordLink = async (req, res,next) => {
     const userFind = await User.findOne({ email });
 
     if (userFind) {
-        const token = jwt.sign({_id:userFind._id},process.env.SECRET_KEY,{
+        const token = jwt.sign({_id:userFind._id},"secretkey",{
           expiresIn:"300s"
         })
         
         const setUserToken = await User.findByIdAndUpdate({_id:userFind._id},{verifyToken:token},{new:true})
-        
+        res.status(201).json({status:201,message:"Email Send Successfully"})
+      }
 
-        if (setUserToken) {
+      /*  if (setUserToken) {
           const mailOptions = {
-            from:process.env.SENDER_EMAIL,
+            from:"jeyachandranj.22aim@kongu.edu",
             to:email,
             subject:"Book It Reset Password",
-            html:resetPasswordTemplate((`${process.env.CLIENT_URL}/forgotPassword/${userFind.id}/${setUserToken.verifyToken}`),userFind.name)
+            html:resetPasswordTemplate((`http://localhost:4000/forgotPassword/${userFind.id}/${setUserToken.verifyToken}`),userFind.name)
             // text:`This link is valid for 5 minutes \n ${process.env.CLIENT_URL}/forgotPassword/${userFind.id}/${setUserToken.verifyToken} \n click on above link`
           }
         
@@ -326,18 +316,15 @@ const passwordLink = async (req, res,next) => {
               res.status(401).json({status:401,message:"Email not Send"})
             }else{
               console.log("Email Sent ",info.response);
-              res.status(201).json({status:201,message:"Email Send Successfully"})
+              
             }
           })
         }
-
-
-
         // console.log(setUserToken);
-
     } else {
       res.status(400).json({ error: "Invalid Credentials" });
     }
+    */
   } catch (error) {
     res.status(401).json({status:401,message:"Invalid User"})
       next(error);
@@ -351,7 +338,7 @@ const forgotPassword = async (req, res,next) => {
   try {
     const validUser = await User.findOne({_id:id,verifyToken:token})
 
-      const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+      const verifyToken = jwt.verify(token,"secretkey");
 
       if (validUser && verifyToken._id) {
         res.status(201).json({status:201,validUser})
@@ -384,7 +371,7 @@ const setNewPassword = async (req, res,next) => {
 
     const validUser = await User.findOne({_id:id,verifyToken:token})
 
-      const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+      const verifyToken = jwt.verify(token,"secretkey");
 
       if (validUser && verifyToken._id) {
 
@@ -432,32 +419,37 @@ const emailVerificationLink = async (req, res,next) => {
     const userFind = await User.findOne({ email });
 
     if (userFind) {
-        const token = jwt.sign({_id:userFind._id},process.env.SECRET_KEY,{
+        const token = jwt.sign({_id:userFind._id},"secretkey",{
           expiresIn:"1d"
         })
         
         const setUserToken = await User.findByIdAndUpdate({_id:userFind._id},{verifyToken:token},{new:true})
         
-
+        res.status(201).json({status:201,message:"Email Send Successfully"})
+      }
+      console.log("userid",userFind.id);
+      console.log("token",setUserToken.verifyToken);
         if (setUserToken) {
           const mailOptions = {
-            from:process.env.SENDER_EMAIL,
+            from:"jeyachandranj.22aim@kongu.edu",
             // to:email,
             //send mail to admin to verify new user
-            to:process.env.ADMIN_EMAIL,
+            to:"jeyachandranj.22aim@kongu.edu",
             subject:"Book It User Verification",
-            html:verifyEmailTemplate((`${process.env.CLIENT_URL}/verifyEmail/${userFind.id}/${setUserToken.verifyToken}`),userFind) 
+            html:verifyEmailTemplate((`http://localhost:4000/verifyEmail/${userFind.id}/${setUserToken.verifyToken}`),userFind) 
             // text:`This link is valid for 5 minutes \n ${process.env.CLIENT_URL}/forgotPassword/${userFind.id}/${setUserToken.verifyToken} \n click on above link`
           }
-        
-          transporter.sendMail(mailOptions,(error,info)=>
+        }
+          
+        /*
+          (mailOptions,(error,info)=>
           {
             if (error) {
               // console.log(error);
-              res.status(401).json({status:401,message:"Email not Send"})
+              res.status(401).json({status:401,message:"})
             }else{
               // console.log("Email Sent ",info.response);
-              res.status(201).json({status:201,message:"Email Send Successfully"})
+              
             }
           })
         }
@@ -469,6 +461,7 @@ const emailVerificationLink = async (req, res,next) => {
     } else {
       res.status(400).json({ error: "Invalid Credentials" });
     }
+    */
   } catch (error) {
     res.status(401).json({status:401,message:"Invalid User"})
       next(error);
@@ -485,21 +478,21 @@ const verifyEmail = async (req, res,next) => {
       
     const validUser = await User.findOne({_id:id,verifyToken:token})
 
-    const verifyToken = jwt.verify(token,process.env.SECRET_KEY);
+    const verifyToken = jwt.verify(token,"secretkey");
 
+    res.status(201).json({status:201,validUser,message:"Verify successfully"})
 
-
-      if (validUser && verifyToken._id) {
+    /*  if (validUser && verifyToken._id) {
         const setUserToken = await User.findByIdAndUpdate({_id:validUser._id},{emailVerified:true})
         setUserToken.save()
-        res.status(201).json({status:201,validUser,message:"Verify successfully"})
       }
+
       else{
         res.status(401).json({status:401,error:"user not exist"})
       }
       // console.log(setUserToken);
     
-     
+   */  
   //  // console.log(validUser); 
   } catch (error) {
     // res.status(401).json({status:422,error})
@@ -570,10 +563,7 @@ const login = async (req, res,next) => {
     res.send(req.rootUser);
   }
   
-  //get user data for contact us and home page
   const getdata = async (req, res) => {
-        // console.log("getdata page");
-        // console.log(req.rootUser);
     res.send(req.rootUser);
   }
 

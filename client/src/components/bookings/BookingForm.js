@@ -12,7 +12,7 @@ import notVerified from "../../assets/notVerified.jpg";
 const BookingForm = () => {
   const navigate = useNavigate();
   const [authStatus, setAuthStatus] = useState("");
-  const [emailVerified, setEmailVerified] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(true);
 
   const { hallId, hallName } = useParams();
   //consolelog(hallId);
@@ -43,7 +43,7 @@ const BookingForm = () => {
   const userContact = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/getdata`,
+        `http://localhost:4000/getdata`,
         {
           withCredentials: true, // include credentials in the request
           headers: {
@@ -136,7 +136,7 @@ const BookingForm = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/bookings`,
+        `http://localhost:4000/bookings`,
         {
           userId,
           department,

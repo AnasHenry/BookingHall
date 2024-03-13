@@ -17,7 +17,7 @@ const HallsAdmin = () => {
 
   const callAboutPage = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/about`, {
+      const response = await axios.get(`http://localhost:4000/about`, {
         withCredentials: true, 
         headers: {
           Accept: "application/json",
@@ -49,7 +49,7 @@ const HallsAdmin = () => {
 
   const getHallsData = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/halls`, {
+      const response = await axios.get(`http://localhost:4000/halls`, {
         withCredentials: true, // include credentials in the request
         headers: {
           Accept: "application/json",
@@ -87,7 +87,7 @@ const HallsAdmin = () => {
 
     try {
       const response = await axios.delete (
-        `${process.env.REACT_APP_SERVER_URL}/halls/${hallId}`,
+        `http://localhost:4000/halls/${hallId}`,
 
         {
           withCredentials: true, // To include credentials in the request
@@ -162,7 +162,7 @@ const HallsAdmin = () => {
    <div className="py-5 md:py-0 flex container mx-auto px-6 justify-between  items-center">
    <div className="mx-auto ">
     <h1 className="text-xl  sm:text-3xl md:text-4xl lg:text-3xl xl:text-3xl text-center text-gray-800 font-black leading-7 ml-3 md:leading-10">
-   Available <span className="text-indigo-700"> Halls</span>  </h1>
+   Available <span style={{"color":"#6d7f69"}}> Halls</span>  </h1>
 
    </div>
    <Link to="/hallForm">
@@ -297,7 +297,7 @@ const HallsAdmin = () => {
                       >
                         Book Now
                       </button>
-                {userData.email === process.env.REACT_APP_MASTER_ADMIN_EMAIL || userData.email === hall.hallCreater  ? 
+                {userData.email === "jeyachandranj.22aim@kongu.edu" || userData.email === hall.hallCreater  ? 
                 <>
                       <button className="w-full rounded-xl border-2 border-blue-500 bg-white px-3 py-2 font-semibold text-blue-500 hover:bg-blue-500 hover:text-white"
                         onClick={() => handleEditClick(hall._id, hall.name)}

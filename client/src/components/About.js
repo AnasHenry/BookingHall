@@ -37,7 +37,7 @@ const About = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/emailVerificationLink`,
+        `http://localhost:4000/emailVerificationLink`,
         {
           email,
         },
@@ -66,7 +66,7 @@ const About = () => {
   const callAboutPage = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/about`,
+        `http://localhost:4000/about`,
         {
           withCredentials: true,
           headers: {

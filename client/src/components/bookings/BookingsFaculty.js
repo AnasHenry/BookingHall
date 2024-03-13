@@ -16,7 +16,7 @@ const BookingFaculty = () => {
 
   const getBookingData = async (userId) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bookingsFaculty`, {
+      const response = await axios.get(`http://localhost:4000/bookingsFaculty`, {
         withCredentials: true, // include credentials in the request
         headers: {
           Accept: "application/json",
@@ -114,7 +114,7 @@ const BookingFaculty = () => {
             Pending
           </button>
           
-        {process.env.REACT_APP_HOD_FEATURE === "true" &&
+        {"false" === "true" &&
         <div>
           <button
             className={`rounded-full px-4 py-2 mx-4 focus:outline-none ${filterValue === "Approved By HOD" ? "bg-indigo-100 text-indigo-800" : "bg-white text-gray-800 hover:bg-gray-100"}`}

@@ -15,14 +15,14 @@ const HallForm = () => {
   const [hallData, setHallData] = useState({
     name:"",location:"",capacity:"",amenities:"",description:""
   });
-  const [emailVerified, setEmailVerified] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(true);
     const[hallCreater,setHallCreater] = useState("")
 
 
 
   const userContact = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getdata`, {
+      const response = await axios.get(`http://localhost:4000/getdata`, {
         withCredentials: true, // include credentials in the request
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const HallForm = () => {
     // setIsLoading(true)
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/halls`,
+        `http://localhost:4000/halls`,
         {
           name,location,capacity,amenities,description ,hallCreater
         },

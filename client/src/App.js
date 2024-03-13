@@ -6,11 +6,9 @@ import axios from "axios"
 import Navbar from "./components/Navbar";
 // import Home from "./components/Home";
 import About from "./components/About";
-import Contact from "./components/Contact";
 import Signup from "./components/auth/Signup";
 import Logout from "./components/auth/Logout";
 import Login from "./components/auth/Login";
-import ErrorPage from "./components/ErrorPage";
 import Halls from "./components/halls/Halls";
 import BookingForm from "./components/bookings/BookingForm";
 import BookingsAdmin from "./components/bookings/BookingsAdmin";
@@ -71,10 +69,9 @@ const App = () => {
 
         <Navbar />
         <Routes>
-        <Route path="/" element={state.userType === "admin" ? <AdminDashboard /> : state.userType === "faculty" ? <FacultyDashboard /> : process.env.REACT_APP_HOD_FEATURE &&  state.userType === "hod" ? <HodDashboard />  : <Login />} />
+        <Route path="/" element={state.userType === "admin" ? <AdminDashboard /> : state.userType === "faculty" ? <FacultyDashboard /> : "false" &&  state.userType === "hod" ? <HodDashboard />  : <Login />} />
           {/* <Route path="/" element={<Home />} /> */}
           <Route path="/profile" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/calendar" element={<CalendarView />} />
           <Route path="signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
@@ -88,20 +85,16 @@ const App = () => {
           
           <Route path="/halls" element={state.userType === "admin" ? <HallsAdmin/> : <Halls />}/>
           <Route exact path="/halls/:hallId/:hallName" element={state.userType === "admin" ?<HallsEdit /> : <Unauthorized />} />
-          <Route exact path="/bookingsEdit/:bookingId" element={state.userType === "admin" ? <BookingUpdateFrom/>  : process.env.REACT_APP_HOD_FEATURE &&  state.userType === "hod" ? <BookingUpdateFrom/>  : <Unauthorized />} />
+          <Route exact path="/bookingsEdit/:bookingId" element={state.userType === "admin" ? <BookingUpdateFrom/>  : "false" &&  state.userType === "hod" ? <BookingUpdateFrom/>  : <Unauthorized />} />
           
           
           {/* <Route exact path="/bookings/:bookingId" element={state.userType === "admin" ? <BookingUpdateFrom/>  : state.userType === "hod" ? <BookingUpdateFrom/>  : <Unauthorized />} /> */}
           <Route path="/hallForm" element={state.userType === "admin" ?<HallForm /> : <Unauthorized />} />
 
-          <Route path="/bookings" element={state.userType === "admin" ? <BookingsAdmin/> : state.userType === "faculty" ? <BookingFaculty/> :  process.env.REACT_APP_HOD_FEATURE && state.userType === "hod" ? <BookingsHod/>  : <Unauthorized />} />
+          <Route path="/bookings" element={state.userType === "admin" ? <BookingsAdmin/> : state.userType === "faculty" ? <BookingFaculty/> :  "false" && state.userType === "hod" ? <BookingsHod/>  : <Unauthorized />} />
           <Route exact path="/bookingForm/:hallId/:hallName" element={<BookingForm />} />
           {/* <Route path="/bookings" element={<Booking/>} /> */}
-
           <Route exact path="/bookingsView/:bookingId" element={<BookingsView/>} />
-   
-
-          <Route path="/*" element={<ErrorPage />} />
         </Routes>
         
       <Footer/>

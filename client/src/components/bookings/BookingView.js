@@ -77,7 +77,7 @@ const BookingsView = () => {
 
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/bookingsView/${bookingId}`,
+        `http://localhost:4000/bookingsView/${bookingId}`,
         {
           withCredentials: true,
           headers: {
@@ -112,7 +112,7 @@ const BookingsView = () => {
     //consolelog(isApproved);
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_SERVER_URL}/bookingsEdit/${bookingId}`,
+        `http://localhost:4000/bookingsEdit/${bookingId}`,
         {
           isApproved: isApproved,
           rejectionReason:

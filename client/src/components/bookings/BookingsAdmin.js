@@ -14,7 +14,7 @@ const BookingsAdmin = () => {
   const [bookingData, setBookingData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [filterValue, setFilterValue] = useState("Approved By HOD");
-  const [emailVerified, setEmailVerified] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(true);
   const [userData, setUserData] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [rejectionReason, setRejectionReason] = useState('');
@@ -61,7 +61,7 @@ const BookingsAdmin = () => {
   // };
   const userContact = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getdata`, {
+      const response = await axios.get(`http://localhost:4000/getdata`, {
         withCredentials: true, // include credentials in the request
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +96,7 @@ const BookingsAdmin = () => {
 
   const getBookingData = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bookingsAdmin`, {
+      const response = await axios.get(`http://localhost:4000/bookingsAdmin`, {
         withCredentials: true, // include credentials in the request
         headers: {
           Accept: "application/json",
@@ -176,7 +176,7 @@ const BookingsAdmin = () => {
     //consolelog(isApproved);
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_SERVER_URL}/bookingsEdit/${bookingId}`,
+        `http://localhost:4000/bookingsEdit/${bookingId}`,
         {
           isApproved: isApproved,
           rejectionReason:
@@ -303,7 +303,7 @@ const BookingsAdmin = () => {
             All
           </button>
 
-{process.env.REACT_APP_HOD_FEATURE === "true" ?
+{"false" === "true" ?
           <button
             className={`rounded-full px-4 py-2 mx-4 focus:outline-none ${filterValue === "Approved By HOD" ? "bg-indigo-100 text-indigo-800 " : "bg-white text-gray-800 hover:bg-gray-100"}`}
             onClick={() => handleFilter("Approved By HOD")}

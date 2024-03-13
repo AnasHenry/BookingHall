@@ -23,6 +23,6 @@ input::-webkit-inner-spin-button {
 ::-webkit-scrollbar-thumb
 {
 
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #3730A3;
+	-webkit-box-shadow: inset 0 0 6px rgba(111,126,107,255);
+	background-color: #6f7e6b;
 }
