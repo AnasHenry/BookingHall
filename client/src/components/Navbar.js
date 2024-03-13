@@ -23,16 +23,18 @@ const Navbar = () => {
     if (state.userType === "admin") {
       return (
         <div>
-          <Link to="/halls">Halls</Link>
+          <Link to="/halls" style={{
+                    backgroundColor: activeTab === "/halls" ? "#ffffff" : "#6d7f69",
+                    padding: "8px 12px", // Adjust padding as needed
+                    textDecoration: "none"
+                  }}>Halls</Link>
         </div>
       );
     } else if (state.userType === "faculty") {
       return (
         <div>
           <Link to="/bookings" style={{
-                    backgroundColor: activeTab === "profile" ? "#ffffff" : "#6d7f69",
-                    border: "1px solid #6d7f69",
-                    borderRadius: "4px",
+                    backgroundColor: activeTab === "bookings" ? "#ffffff" : "#6d7f69",
                     padding: "8px 12px", // Adjust padding as needed
                     textDecoration: "none"
                   }}>Bookings</Link>
@@ -69,7 +71,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className="w-full border-b"
+      className="w-full border-b rounded-lg overflow-hidden"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
@@ -131,13 +133,12 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/"
-                  onClick={() => setActiveTab("home")}
+                  onClick={() => setActiveTab("")}
                   style={{
-                    backgroundColor: activeTab === "home" ? "#ffffff" : "#6d7f69",
-                    border: "1px solid #6d7f69",
-                    borderRadius: "4px",
+                    backgroundColor: activeTab === "" ? "#ffffff" : "#6d7f69",
                     padding: "8px 12px", // Adjust padding as needed
-                    textDecoration: "none"
+                    textDecoration: "none",
+                    marginRight: "20px",
                   }}
                 >
                   Home
@@ -149,10 +150,9 @@ const Navbar = () => {
                   onClick={() => setActiveTab("events")}
                   style={{
                     backgroundColor: activeTab === "events" ? "#ffffff" : "#6d7f69",
-                    border: "1px solid #6d7f69",
-                    borderRadius: "4px",
                     padding: "8px 12px", // Adjust padding as needed
-                    textDecoration: "none"
+                    textDecoration: "none",
+                    marginRight: "20px",
                   }}
                 >
                   Events
@@ -164,10 +164,9 @@ const Navbar = () => {
                   onClick={() => setActiveTab("calendar")}
                   style={{
                     backgroundColor : activeTab === "calendar" ? "#ffffff" : "#6d7f69",
-                    border: "1px solid #6d7f69",
-                    borderRadius: "4px",
                     padding: "8px 12px", // Adjust padding as needed
-                    textDecoration: "none"
+                    textDecoration: "none",
+                    marginRight: "20px",
                   }}
                 >
                   Calendar
@@ -182,10 +181,10 @@ const Navbar = () => {
                   onClick={() => setActiveTab("profile")}
                   style={{
                     backgroundColor: activeTab === "profile" ? "#ffffff" : "#6d7f69",
-                    border: "1px solid #6d7f69",
-                    borderRadius: "4px",
-                    padding: "8px 12px", // Adjust padding as needed
-                    textDecoration: "none"
+                    padding: "8px 12px", 
+                    textDecoration: "none",
+                    marginRight: "20px",
+                    marginLeft: "17px",
                   }}
                 >
                   Profile
