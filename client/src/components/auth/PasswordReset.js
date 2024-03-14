@@ -63,7 +63,7 @@ const PasswordReset = () => {
       <LoadingSpinner />
     ) :
       <section className="text-gray-600 body-font h-screen flex items-center justify-center bg-white relative">
-        <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: 'url("KEC_BG.jpg")', filter: 'blur(5px)' }}></div>
+        <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: 'url("KEC_BG.jpg")', filter: 'blur(3px)' }}></div>
         <div className="lg:w-2/6 md:w-1/2  bg-white shadow-2xl shadow-blue-200 rounded-lg p-8 flex flex-col md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10">
           <form method="POST">
             {/* <h2 className="text-gray-900 font-medium text-3xl title-font mt-10 mb-5">
@@ -73,7 +73,7 @@ const PasswordReset = () => {
 
 
             <h3 className="text-3xl my-8 sm:text-4xl leading-normal font-extrabold tracking-tight text-gray-900">
-              Forget <span className="text-indigo-600">Password</span>
+              Forget <span style={{"color":"#6d7f69"}}>Password</span>
             </h3>
 
 

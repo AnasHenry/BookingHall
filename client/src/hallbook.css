@@ -14,7 +14,7 @@
 }
 
 .active-link {
-  color: #6d7f69; 
+  color: #6d7f69;
 }
 
 .icon {
@@ -33,9 +33,9 @@ ul {
 }
 
 ul.flex li.active {
-    /* Change the color to your desired color */
-    color: #ff0000; /* Red color */
-  }
+  /* Change the color to your desired color */
+  color: #ff0000; /* Red color */
+}
 
 .marker {
   position: absolute;
@@ -93,10 +93,22 @@ a {
   border-radius: 50%;
 }
 
-.head{
-  color:#6d7f69;
+.head {
+  color: #6d7f69;
 }
 
 nav ul li a {
   transition: background-color 0.4s ease-in-out;
+}
+
+nav ul li{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.glasses {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.2px);
+  -webkit-backdrop-filter: blur(8.2px);
 }

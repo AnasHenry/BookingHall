@@ -86,11 +86,11 @@ const Signup = () => {
         <LoadingSpinner />
       ) : (
         <section className="text-gray-600 body-font my-10  min-h-screen flex items-center justify-center bg-white relative">
-          <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: 'url("KEC_BG.jpg")', filter: 'blur(5px)' }}></div>
+          <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: 'url("KEC_BG.jpg")', filter: 'blur(3px)' }}></div>
           <div className="lg:w-2/6 md:w-1/2 my-10 bg-white shadow-2xl shadow-blue-200 rounded-lg p-8 flex flex-col md:ml-auto md:mr-auto mt-10 md:mt-0 relative z-10">
             <form method="POST">
               <h3 className="text-3xl my-8 sm:text-4xl leading-normal font-extrabold tracking-tight text-gray-900">
-                Sign <span className="text-indigo-600">Up</span>
+                Sign <span style={{"color":"#6d7f69"}}>Up</span>
               </h3>
               <div className="relative mb-4">
                 <label
