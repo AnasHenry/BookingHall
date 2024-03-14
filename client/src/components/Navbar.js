@@ -24,7 +24,7 @@ const Navbar = () => {
       return (
         <div>
           <Link to="/halls" style={{
-                    backgroundColor: activeTab === "/halls" ? "#ffffff" : "#6d7f69",
+                    backgroundColor: activeTab === "halls" ? "#ffffff" : "#6d7f69",
                     padding: "8px 12px", // Adjust padding as needed
                     textDecoration: "none"
                   }}>Halls</Link>

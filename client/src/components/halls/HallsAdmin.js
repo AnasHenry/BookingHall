@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom"
-import axios from 'axios';
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 import LoadingSpinner from "../LoadingSpinner";
 import { toast } from "react-toastify";
 // import BookingForm from "./BookingForm";
@@ -8,21 +8,21 @@ import { toast } from "react-toastify";
 const HallsAdmin = () => {
   const navigate = useNavigate();
   const [hallData, setHallData] = useState({});
-    const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   // const [authStatus, setAuthStatus] = useState("");
-  const [showModal,setShowModal]=useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [selectedHallId, setSelectedHallId] = useState("");
   const [selectedHallName, setSelectedHallName] = useState("");
 
   const callAboutPage = async () => {
     try {
       const response = await axios.get(`http://localhost:4000/about`, {
-        withCredentials: true, 
+        withCredentials: true,
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       });
       const data = response.data;
       //consolelog(data);
@@ -35,8 +35,8 @@ const HallsAdmin = () => {
     } catch (error) {
       if (error.response.status === 401) {
         toast.warn("Unauthrized Access! Please Login!", {
-          toastId: 'Unauthrized'
-      })
+          toastId: "Unauthrized",
+        });
         navigate("/login");
       }
     }
@@ -46,15 +46,14 @@ const HallsAdmin = () => {
   // // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [])
 
-
   const getHallsData = async () => {
     try {
       const response = await axios.get(`http://localhost:4000/halls`, {
         withCredentials: true, // include credentials in the request
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       });
 
       const data = response.data;
@@ -71,22 +70,16 @@ const HallsAdmin = () => {
     }
   };
 
-
-
   useEffect(() => {
-  callAboutPage()
+    callAboutPage();
     getHallsData();
+  }, []);
 
-  }, [])
-
-
-  
   const handleDeleteClick = async (hallId) => {
     // e.preventDefault();
 
-
     try {
-      const response = await axios.delete (
+      const response = await axios.delete(
         `http://localhost:4000/halls/${hallId}`,
 
         {
@@ -100,16 +93,16 @@ const HallsAdmin = () => {
       const data = response.data;
 
       if (!data) {
-        toast.error("Request not send!")
+        toast.error("Request not send!");
         // console.log("Message not send");
       } else {
         getHallsData();
-        toast.success("Hall Deleted Successfull!")
+        toast.success("Hall Deleted Successfull!");
         // alert("Message send");
         setShowModal(false);
         setSelectedHallId("");
         setSelectedHallName("");
-        navigate("/halls")
+        navigate("/halls");
         // setBookingData({ ...bookingData });
       }
     } catch (error) {
@@ -125,15 +118,13 @@ const HallsAdmin = () => {
     }
   };
 
-
   const handleBookingClick = (hallId, hallName) => {
-    navigate(`/bookingForm/${hallId}/${hallName}`)
+    navigate(`/bookingForm/${hallId}/${hallName}`);
   };
 
   const handleEditClick = (hallId, hallName) => {
-    navigate(`/halls/${hallId}/${hallName}`)
+    navigate(`/halls/${hallId}/${hallName}`);
   };
-
 
   // const hallId =hallData.hallId
   // const hallName = hallData.hallName
@@ -142,7 +133,6 @@ const HallsAdmin = () => {
   //   navigate('/bookingForm', { state: { hallId, hallName } });
 
   // };
-
 
   // const handleBookingClick = () => {
   //   sendData(data);
@@ -154,31 +144,31 @@ const HallsAdmin = () => {
   };
 
   return (
-<>{isLoading ? (
-          <LoadingSpinner />
-        ) : 
-    <div className="mt-6 min-h-screen"> 
-    
-   <div className="py-5 md:py-0 flex container mx-auto px-6 justify-between  items-center">
-   <div className="mx-auto ">
-    <h1 className="text-xl  sm:text-3xl md:text-4xl lg:text-3xl xl:text-3xl text-center text-gray-800 font-black leading-7 ml-3 md:leading-10">
-   Available <span style={{"color":"#6d7f69"}}> Halls</span>  </h1>
+    <>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className='mt-6 min-h-screen'>
+          <div className='py-5 md:py-0 flex container mx-auto px-6 justify-between  items-center'>
+            <div className='mx-auto '>
+              <h1 className='text-xl  sm:text-3xl md:text-4xl lg:text-3xl xl:text-3xl text-center text-gray-800 font-black leading-7 ml-3 md:leading-10'>
+                Available <span style={{ color: "#6d7f69" }}> Halls</span>{" "}
+              </h1>
+            </div>
+            <Link to='/hallForm'>
+              <button className='flex self-end focus:outline-none lg:text-lg lg:font-bold focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700  md:block bg-transparent transition duration-150 ease-in-out hover:bg-gray-200 rounded border border-indigo-700 text-indigo-700  sm:px-8 py-1 sm:py-3 text-sm'>
+                Create Hall
+              </button>
+            </Link>
+          </div>
 
-   </div>
-   <Link to="/hallForm">
-            <button className="flex self-end focus:outline-none lg:text-lg lg:font-bold focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700  md:block bg-transparent transition duration-150 ease-in-out hover:bg-gray-200 rounded border border-indigo-700 text-indigo-700  sm:px-8 py-1 sm:py-3 text-sm">
-              Create Hall</button>
-          </Link>
-   </div>
-
-      {Array.isArray(hallData) && hallData.length > 0 ? (
-        hallData.map((hall) => (
-          <div key={hall._id} className="my-2 ">
-            <div className="flex w-full items-center justify-center">
-              <div className="w-full rounded-xl p-12 shadow-2xl shadow-blue-200 md:w-8/12 lg:w-8/12 bg-white">
-
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-                  {/* <div className="grid-cols-1 lg:col-span-3">
+          {Array.isArray(hallData) && hallData.length > 0 ? (
+            hallData.map((hall) => (
+              <div key={hall._id} className='my-2 '>
+                <div className='flex w-full items-center justify-center'>
+                  <div className='w-full rounded-xl p-12 shadow-2xl shadow-blue-200 md:w-8/12 lg:w-8/12 bg-white'>
+                    <div className='grid grid-cols-1 gap-6 lg:grid-cols-12'>
+                      {/* <div className="grid-cols-1 lg:col-span-3">
                     <div className="mx-auto flex h-[90px] w-[90px] items-center justify-center rounded-full bg-blue-100 p-4">
                       <svg
                         id="logo-39"
@@ -210,14 +200,16 @@ const HallsAdmin = () => {
                     </div>
                   </div> */}
 
-                  <div className="col-span-1 lg:col-span-9">
-                    <div className="text-center lg:text-left">
-                      <h2 className="text-2xl font-bold text-zinc-700">{hall.name}</h2>
-                      {/* <p className="mt-2 text-l font-semibold text-zinc-700">{hall.location}</p> */}
-                      {/* <p className="mt-4 text-zinc-500">I am a Front End Developer and UI/UX Designer</p> */}
-                    </div>
+                      <div className='col-span-1 lg:col-span-9'>
+                        <div className='text-center lg:text-left'>
+                          <h2 className='text-2xl font-bold text-zinc-700'>
+                            {hall.name}
+                          </h2>
+                          {/* <p className="mt-2 text-l font-semibold text-zinc-700">{hall.location}</p> */}
+                          {/* <p className="mt-4 text-zinc-500">I am a Front End Developer and UI/UX Designer</p> */}
+                        </div>
 
-                    {/* <div className="mt-6 grid grid-cols-2 gap-6 text-center lg:text-left">
+                        {/* <div className="mt-6 grid grid-cols-2 gap-6 text-center lg:text-left">
                       <div>
                         <p className="font-bold text-zinc-700">Hall Id</p>
                       </div>
@@ -227,8 +219,7 @@ const HallsAdmin = () => {
                       </div>
                     </div> */}
 
-
-                    {/* <div className="mt-6 grid grid-cols-2 gap-6 text-center lg:text-left">
+                        {/* <div className="mt-6 grid grid-cols-2 gap-6 text-center lg:text-left">
                 <div>
                   <p className="font-bold text-zinc-700">Name</p>
                 </div>
@@ -238,113 +229,109 @@ const HallsAdmin = () => {
                 </div>
               </div> */}
 
+                        <div className='mt-6 grid grid-cols-2 gap-6 text-center lg:text-left'>
+                          <div>
+                            <p className='font-bold text-zinc-700'>Location</p>
+                          </div>
 
-                    <div className="mt-6 grid grid-cols-2 gap-6 text-center lg:text-left">
-                      <div>
-                        <p className="font-bold text-zinc-700">Location</p>
-                      </div>
+                          <div>
+                            <p className='text-m font-semibold text-zinc-700'>
+                              {hall.location}
+                            </p>
+                          </div>
+                        </div>
 
-                      <div>
-                        <p className="text-m font-semibold text-zinc-700">{hall.location}</p>
-                      </div>
-                    </div>
+                        <div className='mt-6 grid grid-cols-2 gap-6 text-center lg:text-left'>
+                          <div>
+                            <p className='font-bold text-zinc-700'>Capacity</p>
+                          </div>
 
+                          <div>
+                            <p className='text-m font-semibold text-zinc-700'>
+                              {hall.capacity}
+                            </p>
+                          </div>
+                        </div>
 
+                        <div className='mt-6 grid grid-cols-2 gap-6 text-center lg:text-left'>
+                          <div>
+                            <p className='font-bold text-zinc-700'>Amenities</p>
+                          </div>
 
-                    <div className="mt-6 grid grid-cols-2 gap-6 text-center lg:text-left">
-                      <div>
-                        <p className="font-bold text-zinc-700">Capacity</p>
-                      </div>
+                          <div>
+                            <p className='text-m font-semibold text-zinc-700'>
+                              {hall.amenities}
+                            </p>
+                          </div>
+                        </div>
 
-                      <div>
-                        <p className="text-m font-semibold text-zinc-700">{hall.capacity}</p>
-                      </div>
-                    </div>
+                        <div className='mt-6 grid grid-cols-2 gap-6 text-center lg:text-left'>
+                          <div>
+                            <p className='font-bold text-zinc-700'>
+                              Description
+                            </p>
+                          </div>
 
+                          <div>
+                            <p className='text-m font-semibold text-zinc-700'>
+                              {hall.description}
+                            </p>
+                          </div>
+                        </div>
 
-                    <div className="mt-6 grid grid-cols-2 gap-6 text-center lg:text-left">
-                      <div>
-                        <p className="font-bold text-zinc-700">Amenities</p>
-                      </div>
+                        <div className='mt-6 grid grid-cols-3 gap-4'>
+                          {/* <Link to={`/bookingForm`}> */}
+                          <button
+                            className='w-full rounded-xl border-2 border-blue-500 bg-white px-3 py-2 font-semibold text-blue-500 hover:bg-blue-500 hover:text-white'
+                            onClick={() =>
+                              handleBookingClick(hall._id, hall.name)
+                            }>
+                            Book Now
+                          </button>
+                          {userData.email === "jeyachandranj.22aim@kongu.edu" ||
+                          userData.email === hall.hallCreater ? (
+                            <>
+                              <button
+                                className='w-full rounded-xl border-2 border-blue-500 bg-white px-3 py-2 font-semibold text-blue-500 hover:bg-blue-500 hover:text-white'
+                                onClick={() =>
+                                  handleEditClick(hall._id, hall.name)
+                                }>
+                                Edit Hall
+                              </button>
 
-                      <div>
-                        <p className="text-m font-semibold text-zinc-700">{hall.amenities}</p>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 grid grid-cols-2 gap-6 text-center lg:text-left">
-                      <div>
-                        <p className="font-bold text-zinc-700">Description</p>
-                      </div>
-
-                      <div>
-                        <p className="text-m font-semibold text-zinc-700">{hall.description}</p>
-                      </div>
-                    </div>
-
-
-
-
-
-
-
-
-
-                    <div className="mt-6 grid grid-cols-3 gap-4">
-                      {/* <Link to={`/bookingForm`}> */}
-                      <button className="w-full rounded-xl border-2 border-blue-500 bg-white px-3 py-2 font-semibold text-blue-500 hover:bg-blue-500 hover:text-white"
-                        onClick={() => handleBookingClick(hall._id, hall.name)}
-                      >
-                        Book Now
-                      </button>
-                {userData.email === "jeyachandranj.22aim@kongu.edu" || userData.email === hall.hallCreater  ? 
-                <>
-                      <button className="w-full rounded-xl border-2 border-blue-500 bg-white px-3 py-2 font-semibold text-blue-500 hover:bg-blue-500 hover:text-white"
-                        onClick={() => handleEditClick(hall._id, hall.name)}
-                      >
-                        Edit Hall
-                      </button>
-
-                      <button className="w-full rounded-xl border-2 border-red-500 bg-white px-3 py-2 font-semibold text-red-500 hover:bg-red-500 hover:text-white"
-                        // onClick={() => handleDeleteClick(hall._id, hall.name)}
-                        // onClick={() => setShowModal(true)} 
-                        onClick={() =>
-                          handleDeleteModal(hall._id, hall.name)
-                        }
-                        >
-                        Delete Hall
-                      </button>
-                        </>
-
-                    : <></>}
-                      {/* </Link> */}
-                      {/* <button className="w-full rounded-xl border-2 border-blue-500 bg-white px-3 py-2 font-semibold text-blue-500 hover:bg-blue-500 hover:text-white">
+                              <button
+                                className='w-full rounded-xl border-2 border-red-500 bg-white px-3 py-2 font-semibold text-red-500 hover:bg-red-500 hover:text-white'
+                                // onClick={() => handleDeleteClick(hall._id, hall.name)}
+                                // onClick={() => setShowModal(true)}
+                                onClick={() =>
+                                  handleDeleteModal(hall._id, hall.name)
+                                }>
+                                Delete Hall
+                              </button>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                          {/* </Link> */}
+                          {/* <button className="w-full rounded-xl border-2 border-blue-500 bg-white px-3 py-2 font-semibold text-blue-500 hover:bg-blue-500 hover:text-white">
                   View Profile
                 </button> */}
+                        </div>
+                      </div>
                     </div>
-
-
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        
-
-      
-        
-
-        ))
-      ) : (
-        <h2 className="text-2xl font-bold text-zinc-700  text-center mt-10">No halls found.</h2>
-
+            ))
+          ) : (
+            <h2 className='text-2xl font-bold text-zinc-700  text-center mt-10'>
+              No halls found.
+            </h2>
+          )}
+        </div>
       )}
 
-      </div>
-}
-
-  
-{/* 
+      {/* 
       {
         showModal &&
               
@@ -358,34 +345,29 @@ const HallsAdmin = () => {
         
       } */}
 
-{showModal && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg px-8 py-6">
-            <h2 className="text-lg font-bold mb-4">
+      {showModal && (
+        <div className='fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50'>
+          <div className='bg-white rounded-lg px-8 py-6'>
+            <h2 className='text-lg font-bold mb-4'>
               Are you sure you want to delete {selectedHallName}?
             </h2>
-            <div className="flex justify-end">
+            <div className='flex justify-end'>
               <button
-                className="mr-2 px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded-lg focus:outline-none"
-                onClick={() =>
-                  handleDeleteClick(selectedHallId)
-                }
-              >
+                className='mr-2 px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded-lg focus:outline-none'
+                onClick={() => handleDeleteClick(selectedHallId)}>
                 Delete
               </button>
               <button
-                className="px-4 py-2 text-white bg-gray-500 hover:bg-gray-600 rounded-lg focus:outline-none"
-                onClick={() => setShowModal(false)}
-              >
+                className='px-4 py-2 text-white bg-gray-500 hover:bg-gray-600 rounded-lg focus:outline-none'
+                onClick={() => setShowModal(false)}>
                 Cancel
               </button>
             </div>
           </div>
         </div>
       )}
-        </>
+    </>
   );
-  
 };
 
 export default HallsAdmin;

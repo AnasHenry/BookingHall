@@ -104,8 +104,9 @@ const About = () => {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <div className="flex min-h-screen w-full items-center justify-center ">
-          <div className="w-full rounded-xl p-12 shadow-2xl shadow-blue-200 md:w-8/12 lg:w-6/12 bg-white">
+        <div className="flex min-h-screen w-full items-center justify-center relative">
+          <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: 'url("profile.jpg")'}}></div>
+          <div className="w-full rounded-xl p-12 shadow-2xl shadow-blue-200 md:w-8/12 lg:w-6/12 bg-white relative">
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <div className="col-span-1 lg:col-span-9">
                 <div className="text-center lg:text-left">
