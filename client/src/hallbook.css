@@ -105,10 +105,22 @@ nav ul li{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.glasses {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(8.2px);
-  -webkit-backdrop-filter: blur(8.2px);
+.glass-container {
+  background: url("../src/assets/bg.png"); /* Set your background image */
+  background-size: cover;
+  position: relative;
+  height: 400px; /* Adjust height as needed */
+}
+
+.content {
+  background-color: rgb(250, 250, 250, 0.2); /* Adjust opacity as needed */
+  padding: 20px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(10px); /* Adjust blur amount as needed */
+  max-width: 300px; /* Adjust width as needed */
+  text-align: center;
 }

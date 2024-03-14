@@ -85,10 +85,10 @@ const Events = () => {
             <>
               <div
                 key={event._id}
-                className='flex flex-col justify-center items-center my-10 '>
-                <div className='relative flex flex-col items-center  mx-auto  rounded-xl p-8 md:w-8/12 lg:w-10/12 bg-white'>
+                className='flex flex-col justify-center items-center my-10 rounded-2xl'>
+                <div className='relative flex flex-col items-center mx-auto rounded-2xl p-8 md:w-8/12 lg:w-10/12 bg-white'>
                   <div
-                    className='absolute inset-0 z-0 bg-cover bg-center'
+                    className='absolute inset-0 z-0 bg-cover bg-center rounded-2xl'
                     style={{
                       backgroundImage: 'url("event_card_2.jpeg")',
                     }}></div>

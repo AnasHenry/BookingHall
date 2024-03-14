@@ -26,7 +26,8 @@ const Navbar = () => {
           <Link to="/halls" style={{
                     backgroundColor: activeTab === "halls" ? "#ffffff" : "#6d7f69",
                     padding: "8px 12px", // Adjust padding as needed
-                    textDecoration: "none"
+                    textDecoration: "none",
+                    borderRadius: "8px",
                   }}>Halls</Link>
         </div>
       );
@@ -36,7 +37,8 @@ const Navbar = () => {
           <Link to="/bookings" style={{
                     backgroundColor: activeTab === "bookings" ? "#ffffff" : "#6d7f69",
                     padding: "8px 12px", // Adjust padding as needed
-                    textDecoration: "none"
+                    textDecoration: "none",
+                    borderRadius: "8px",
                   }}>Bookings</Link>
         </div>
       );
@@ -129,7 +131,7 @@ const Navbar = () => {
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
-            <ul className="flex text-3xl md:text-base items-center py-10 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white md:bg-transparent z-20">
+            <ul className="flex text-3xl md:text-base items-center py-10 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white md:bg-transparent z-20 rounded-2xl">
               <li>
                 <Link
                   to="/"
@@ -139,6 +141,7 @@ const Navbar = () => {
                     padding: "8px 12px", // Adjust padding as needed
                     textDecoration: "none",
                     marginRight: "20px",
+                    borderRadius: "8px",
                   }}
                 >
                   Home
@@ -153,6 +156,7 @@ const Navbar = () => {
                     padding: "8px 12px", // Adjust padding as needed
                     textDecoration: "none",
                     marginRight: "20px",
+                    borderRadius: "8px",
                   }}
                 >
                   Events
@@ -167,6 +171,7 @@ const Navbar = () => {
                     padding: "8px 12px", // Adjust padding as needed
                     textDecoration: "none",
                     marginRight: "20px",
+                    borderRadius: "8px",
                   }}
                 >
                   Calendar
@@ -185,6 +190,7 @@ const Navbar = () => {
                     textDecoration: "none",
                     marginRight: "20px",
                     marginLeft: "17px",
+                    borderRadius: "8px",
                   }}
                 >
                   Profile
