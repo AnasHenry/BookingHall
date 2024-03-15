@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom"
 import axios from "axios";
-import LoadingSpinner from "../LoadingSpinner";
-// import { toast } from "react-toastify";
-import { format, parseISO } from "date-fns";
-import { DepartmentList } from "../Institutions";
+
 // import BookingForm from "./BookingForm";
 import "../../hallbook.css"
 

@@ -10,6 +10,7 @@
     "axios": "^1.4.0",
     "browserslist": "^4.23.0",
     "date-fns": "^2.29.3",
+    "nodemailer": "^6.9.12",
     "react": "^18.2.0",
     "react-calendar": "^4.6.0",
     "react-dom": "^18.2.0",

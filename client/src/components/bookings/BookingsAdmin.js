@@ -4,6 +4,7 @@ import axios from 'axios';
 import LoadingSpinner from "../LoadingSpinner";
 import { toast } from "react-toastify";
 import { format } from "date-fns"
+
 // import BookingForm from "./BookingForm";
 // eslint-disable-next-line no-unused-vars
 // import { ApprovedByAdmin, ApprovedByHod, RejectedByAdmin } from "../Steps"
@@ -244,9 +245,9 @@ const BookingsAdmin = () => {
   //   }
   // };
 
-
   const handleFilter = (value) => {
     setFilterValue(value);
+    
   };
 
   const filteredBookings = Object.values(bookingData).filter((bookingData) => {
